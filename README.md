@@ -1,6 +1,8 @@
 t3d-pano
 ===
 
+[![NPM Package][npm]][npm-url]
+
 Panorama extension for t3d.
 
 [Demo](https://uinosoft.github.io/t3d-pano/examples/)
@@ -91,3 +93,6 @@ class CustomSwitcher extends PanoSwitcher {
 
 }
 ````
+
+[npm]: https://img.shields.io/npm/v/t3d-pano
+[npm-url]: https://www.npmjs.com/package/t3d-pano
