@@ -10,6 +10,7 @@ class PanoCameraControls {
 		this.object.euler.order = 'YXZ';
 
 		this.domElement = (domElement !== undefined) ? domElement : document;
+		this.domElement.style.touchAction = 'none';
 		if (domElement) this.domElement.setAttribute('tabindex', -1);
 
 		this.cameraFov = 65 / 180 * Math.PI;
@@ -261,6 +262,10 @@ class PanoCameraControls {
 			}
 		}
 
+		function pointerCancel(event) {
+			removePointer(event);
+		}
+
 		function pointermove(event) {
 			if (event.pointerType === 'touch') {
 				touchMove(event);
@@ -270,6 +275,13 @@ class PanoCameraControls {
 		}
 
 		function pointerdown(event) {
+			if (pointers.length === 0) {
+				scope.domElement.setPointerCapture(event.pointerId);
+
+				scope.domElement.addEventListener('pointermove', pointermove);
+				scope.domElement.addEventListener('pointerup', pointerup);
+			}
+
 			pointers.push(event);
 
 			if (event.pointerType === 'touch') {
@@ -282,6 +294,13 @@ class PanoCameraControls {
 		function pointerup(event) {
 			removePointer(event);
 
+			if (pointers.length === 0) {
+				scope.domElement.releasePointerCapture(event.pointerId);
+
+				scope.domElement.removeEventListener('pointermove', pointermove);
+				scope.domElement.removeEventListener('pointerup', pointerup);
+			}
+
 			state = STATE.NONE;
 
 			if (event.pointerType === 'mouse') {
@@ -290,11 +309,10 @@ class PanoCameraControls {
 			rotateDelta.set(0, 0);
 		}
 
-		this.domElement.addEventListener('pointermove', pointermove);
 		this.domElement.addEventListener('pointerdown', pointerdown);
-		this.domElement.addEventListener('pointerup', pointerup);
 
 		this.domElement.addEventListener('mouseleave', mouseleave);
+		this.domElement.addEventListener('pointercancel', pointerCancel);
 		this.domElement.addEventListener('wheel', onMouseWheel, { passive: false });
 
 		updateRotateVector();
