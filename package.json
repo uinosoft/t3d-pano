@@ -1,6 +1,6 @@
 {
   "name": "t3d-pano",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Panorama for t3d.",
   "type": "module",
   "main": "./build/t3d.pano.js",
