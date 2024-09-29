@@ -17,7 +17,7 @@
 		{
 			"imports": {
 				"t3d": "./libs/t3d/build/t3d.module.js",
-				"t3d/examples/jsm/": "./libs/t3d/examples/jsm/",
+				"t3d/addons/": "./libs/t3d/examples/jsm/",
 				"t3d-pano": "../build/t3d.pano.module.js"
 			}
 		}
@@ -25,10 +25,10 @@
 
     <script type="module">
 		import * as t3d from 't3d';
-		import { Clock } from 't3d/examples/jsm/Clock.js';
-		import { ImageBitmapLoader } from 't3d/examples/jsm/loaders/ImageBitmapLoader.js';
-		import { Texture2DLoader } from 't3d/examples/jsm/loaders/Texture2DLoader.js';
-		import { Raycaster } from 't3d/examples/jsm/Raycaster.js';
+		import { Clock } from 't3d/addons/Clock.js';
+		import { ImageBitmapLoader } from 't3d/addons/loaders/ImageBitmapLoader.js';
+		import { Texture2DLoader } from 't3d/addons/loaders/Texture2DLoader.js';
+		import { Raycaster } from 't3d/addons/Raycaster.js';
 
 		import { Pano, PanoGraph, FadeSwitcher, StretchSwitcher, PanoCameraControls } from 't3d-pano';
 
@@ -46,7 +46,7 @@
 		container.appendChild(canvas);
 
 		const contextParams = { antialias: true, alpha: false, stencil: true };
-		const gl = canvas.getContext("webgl2", contextParams) || canvas.getContext("webgl1", contextParams);
+		const gl = canvas.getContext('webgl2', contextParams) || canvas.getContext('webgl1', contextParams);
 
 		const renderer = new t3d.WebGLRenderer(gl);
 		renderer.setClearColor(0.3, 0.3, 0.3, 1);
@@ -62,7 +62,7 @@
 		camera.lookAt(new t3d.Vector3(0, 0, 1), new t3d.Vector3(0, 1, 0));
 
 		const imageLoader = new ImageBitmapLoader();
-		imageLoader.setOptions({ imageOrientation: 'flipY' })
+		imageLoader.setOptions({ imageOrientation: 'flipY' });
 
 		// Create panos
 
@@ -106,7 +106,7 @@
 				});
 
 				return pano._loadPromise;
-			}
+			};
 
 			pano.material.diffuseMap = texture;
 
@@ -158,7 +158,7 @@
 
 				currentSwitcher.run(link, {
 					time: 400
-				}).onComplete(function () {
+				}).onComplete(function() {
 					link.from.visible = false;
 
 					currentIndex = panoArray.indexOf(link.to);
@@ -207,7 +207,7 @@
 		const raycaster = new Raycaster();
 		const mouse = new t3d.Vector2();
 
-		document.addEventListener("click", function(e) {
+		document.addEventListener('click', function(e) {
 			mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
 			mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
@@ -265,7 +265,7 @@
 
 			backRenderTarget.resize(width, height);
 		}
-		window.addEventListener("resize", onWindowResize, false);
+		window.addEventListener('resize', onWindowResize, false);
     </script>
 </body>
 

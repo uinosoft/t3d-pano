@@ -1,7 +1,4 @@
-import {
-	Quaternion,
-	Vector2,
-} from 't3d';
+import { Quaternion, Vector2 } from 't3d';
 
 class PanoCameraControls {
 
@@ -25,7 +22,7 @@ class PanoCameraControls {
 		this.enableRotateDamping = true;
 		this.rotateDampingFactor = 0.5;
 
-		this.update = function () {
+		this.update = function() {
 			rotateVector.add(rotateAccum);
 
 			this.object.euler.x -= rotateVector.x;
@@ -210,7 +207,7 @@ class PanoCameraControls {
 
 					rotateStart.copy(rotateEnd);
 					break;
-				case STATE.TOUCH_DOLLY:
+				case STATE.TOUCH_DOLLY: {
 					const position = getSecondPointerPosition(event);
 
 					const dx = event.pageX - position.x;
@@ -226,6 +223,7 @@ class PanoCameraControls {
 
 					dollyStart.copy(dollyEnd);
 					break;
+				}
 				default:
 					state = STATE.NONE;
 			}
@@ -247,7 +245,7 @@ class PanoCameraControls {
 
 					state = STATE.TOUCH_ROTATE;
 					break;
-				case 2:
+				case 2: {
 					const dx = pointers[0].pageX - pointers[1].pageX;
 					const dy = pointers[0].pageY - pointers[1].pageY;
 
@@ -257,6 +255,7 @@ class PanoCameraControls {
 
 					state = STATE.TOUCH_DOLLY;
 					break;
+				}
 				default:
 					state = STATE.NONE;
 			}

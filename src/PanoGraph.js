@@ -36,7 +36,7 @@ class PanoGraph {
 			if (link.from === pano) {
 				result.push(link);
 			}
-		})
+		});
 
 		return result;
 	}

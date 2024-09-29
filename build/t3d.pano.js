@@ -397,15 +397,17 @@
 						rotateStart.copy(rotateEnd);
 						break;
 					case STATE.TOUCH_DOLLY:
-						const position = getSecondPointerPosition(event);
-						const dx = event.pageX - position.x;
-						const dy = event.pageY - position.y;
-						const distance = Math.sqrt(dx * dx + dy * dy);
-						dollyEnd.set(0, distance);
-						dollyDelta.set(0, Math.pow(dollyEnd.y / dollyStart.y, scope.dollyingSpeed));
-						dollyOut(dollyDelta.y);
-						dollyStart.copy(dollyEnd);
-						break;
+						{
+							const position = getSecondPointerPosition(event);
+							const dx = event.pageX - position.x;
+							const dy = event.pageY - position.y;
+							const distance = Math.sqrt(dx * dx + dy * dy);
+							dollyEnd.set(0, distance);
+							dollyDelta.set(0, Math.pow(dollyEnd.y / dollyStart.y, scope.dollyingSpeed));
+							dollyOut(dollyDelta.y);
+							dollyStart.copy(dollyEnd);
+							break;
+						}
 					default:
 						state = STATE.NONE;
 				}
@@ -424,12 +426,14 @@
 						state = STATE.TOUCH_ROTATE;
 						break;
 					case 2:
-						const dx = pointers[0].pageX - pointers[1].pageX;
-						const dy = pointers[0].pageY - pointers[1].pageY;
-						const distance = Math.sqrt(dx * dx + dy * dy);
-						dollyStart.set(0, distance);
-						state = STATE.TOUCH_DOLLY;
-						break;
+						{
+							const dx = pointers[0].pageX - pointers[1].pageX;
+							const dy = pointers[0].pageY - pointers[1].pageY;
+							const distance = Math.sqrt(dx * dx + dy * dy);
+							dollyStart.set(0, distance);
+							state = STATE.TOUCH_DOLLY;
+							break;
+						}
 					default:
 						state = STATE.NONE;
 				}
