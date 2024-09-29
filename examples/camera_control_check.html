@@ -45,7 +45,7 @@
 		const contextParams = { antialias: true, alpha: false, stencil: true };
 		const gl = canvas.getContext("webgl2", contextParams) || canvas.getContext("webgl1", contextParams);
 
-		const renderer = new t3d.WebGLRenderer(gl)();
+		const renderer = new t3d.WebGLRenderer(gl);
 		renderer.setClearColor(0.3, 0.3, 0.3, 1);
 		const backRenderTarget = new t3d.RenderTargetBack(canvas);
 
